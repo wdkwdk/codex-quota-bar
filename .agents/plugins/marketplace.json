@@ -1,0 +1,10 @@
+{
+  "name": "wdk-local-plugins",
+  "interface": { "displayName": "WDK 本机插件" },
+  "plugins": [{
+    "name": "codex-quota-bar",
+    "source": { "source": "local", "path": "./plugin" },
+    "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+    "category": "Productivity"
+  }]
+}

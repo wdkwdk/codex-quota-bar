@@ -1,0 +1,20 @@
+{
+  "name": "codex-quota-bar",
+  "version": "0.1.0",
+  "description": "可拖动的 Mac 原生 Codex 额度条，显示剩余额度与重置时间。",
+  "author": { "name": "WDK" },
+  "homepage": "https://github.com/wdkwdk/codex-quota-bar",
+  "repository": "https://github.com/wdkwdk/codex-quota-bar",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Codex 额度条",
+    "shortDescription": "查看额度，拖到喜欢的位置。",
+    "longDescription": "Mac 原生轻量悬浮条，显示 5 小时和每周剩余额度及重置时间。跟随 Codex 窗口，支持拖动、记住位置、右键预设位置和单击查看详情。",
+    "developerName": "WDK",
+    "websiteURL": "https://github.com/wdkwdk/codex-quota-bar",
+    "category": "Productivity",
+    "brandColor": "#737E8C",
+    "composerIcon": "./assets/icon.svg",
+    "defaultPrompt": "启动额度条"
+  }
+}
