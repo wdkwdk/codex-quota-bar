@@ -108,7 +108,7 @@ final class CodexClient {
         do {
             try child.run()
             send(["id": 0, "method": "initialize", "params": ["clientInfo": [
-                "name": "codex_quota_bar", "title": "Codex Quota Bar", "version": "0.1.0"
+                "name": "codex_quota_bar", "title": "Codex Quota Bar", "version": "0.1.1"
             ]]])
         } catch { fail("无法启动 Codex CLI") }
     }

@@ -15,7 +15,7 @@ A small native macOS companion for Codex usage limits, reset times, and a dragga
 
 适用 **macOS 13+，Apple 芯片或 Intel Mac**。需要已经安装并使用 ChatGPT 账户登录 Codex，且账户提供对应额度窗口。**Windows / Linux 暂不支持。**
 
-1. 打开 [Releases](https://github.com/wdkwdk/codex-quota-bar/releases/latest)，下载 `CodexQuotaBar-v0.1.0-macos-universal.zip` 并解压。
+1. 打开 [Releases](https://github.com/wdkwdk/codex-quota-bar/releases/latest)，下载 `CodexQuotaBar-v0.1.1-macos-universal.zip` 并解压。
 2. 双击解压目录里的 `install.command`；也可在终端输入 `sh `（末尾有空格），把目录里的 `scripts/install.sh` 拖进去，再按回车。
 3. 安装完成后，打开 Codex，在新聊天中输入 `@`，选择 **Codex 额度条**，发送“启动”。也可执行：
 

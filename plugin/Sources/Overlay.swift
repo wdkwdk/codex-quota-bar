@@ -47,7 +47,7 @@ final class StripView: NSView {
             return
         }
         var groups = controller.summary(snapshot, compact: false)
-        if groups.map({ width($0) }).reduce(0, +) + 86 > bounds.width {
+        if contentWidth(groups) > bounds.width {
             groups = controller.summary(snapshot, compact: true)
         }
         var x: CGFloat = 28
@@ -61,6 +61,23 @@ final class StripView: NSView {
             drawText(group, at: x, color: textColor)
             x += width(group) + 14
         }
+    }
+
+    func preferredWidth(maximum: CGFloat) -> CGFloat {
+        if let error = controller?.currentError {
+            return min(maximum, ceil(40 + width(error + " · 点击重试")))
+        }
+        guard let controller, let snapshot = controller.snapshot else {
+            return min(maximum, ceil(40 + width("正在读取 Codex 额度…")))
+        }
+        let full = controller.summary(snapshot, compact: false)
+        let groups = contentWidth(full) <= maximum ? full : controller.summary(snapshot, compact: true)
+        return min(maximum, ceil(contentWidth(groups)))
+    }
+
+    private func contentWidth(_ groups: [String]) -> CGFloat {
+        // 左侧拖动区 28、每组图标 21、组间距 33、右侧留白 12。
+        28 + groups.map { width($0) + 21 }.reduce(0, +) + CGFloat(max(0, groups.count - 1)) * 33 + 12
     }
 
     private func width(_ text: String) -> CGFloat {
@@ -233,7 +250,8 @@ final class OverlayController: NSObject, NSApplicationDelegate {
         hostFrame = host
         visibilityReason = "visible"
         if !isDragging {
-            let size = NSSize(width: min(560, max(280, host.width - 24)), height: 32)
+            let maximum = max(280, host.width - 24)
+            let size = NSSize(width: strip.preferredWidth(maximum: maximum), height: 32)
             panel.setContentSize(size)
             let defaultX = host.width > 900 ? 0.7 : 0.5
             let x = settings.object(forKey: "positionX") == nil ? defaultX : settings.double(forKey: "positionX")

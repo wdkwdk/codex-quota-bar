@@ -16,15 +16,16 @@ struct Preview {
             ("dark", NSAppearance.Name.darkAqua, NSColor(calibratedWhite: 0.12, alpha: 1))
         ] {
             controller.strip.appearance = NSAppearance(named: appearanceName)
-            controller.panel.setContentSize(NSSize(width: 560, height: 32))
-            let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: 1120, pixelsHigh: 64,
+            let size = NSSize(width: controller.strip.preferredWidth(maximum: 560), height: 32)
+            controller.panel.setContentSize(size)
+            let bitmap = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size.width * 2), pixelsHigh: 64,
                 bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
                 colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
-            bitmap.size = NSSize(width: 560, height: 32)
+            bitmap.size = size
             NSGraphicsContext.saveGraphicsState()
             NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: bitmap)
             background.setFill()
-            NSRect(x: 0, y: 0, width: 560, height: 32).fill()
+            NSRect(origin: .zero, size: size).fill()
             controller.strip.appearance!.performAsCurrentDrawingAppearance {
                 controller.strip.draw(controller.strip.bounds)
             }

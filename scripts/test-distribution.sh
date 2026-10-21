@@ -1,12 +1,13 @@
 #!/bin/sh
 set -eu
 project_dir=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-archive=${1:-"$project_dir/dist/CodexQuotaBar-v0.1.0-macos-universal.zip"}
+version=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$project_dir/plugin/bin/Codex Quota Bar.app/Contents/Info.plist")
+archive=${1:-"$project_dir/dist/CodexQuotaBar-v$version-macos-universal.zip"}
 work_dir=$(mktemp -d "$project_dir/.build/install-test.XXXXXX")
 trap 'rm -rf "$work_dir"' EXIT HUP INT TERM
 mkdir -p "$work_dir/package with spaces" "$work_dir/mock-bin" "$work_dir/user home"
 ditto -x -k "$archive" "$work_dir/package with spaces"
-package_dir="$work_dir/package with spaces/CodexQuotaBar-v0.1.0-macos-universal"
+package_dir="$work_dir/package with spaces/CodexQuotaBar-v$version-macos-universal"
 binary="$package_dir/plugin/bin/Codex Quota Bar.app/Contents/MacOS/CodexQuotaBar"
 codesign --verify --strict "$package_dir/plugin/bin/Codex Quota Bar.app"
 xcrun lipo "$binary" -verify_arch arm64 x86_64
